@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2017 8:42:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="restaurantsearch.User" table="user" catalog="mydb" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userFname" type="string">
+            <column name="user_fname" length="45" not-null="true" />
+        </property>
+        <property name="userLname" type="string">
+            <column name="user_lname" length="45" not-null="true" />
+        </property>
+        <property name="userPhone" type="string">
+            <column name="user_phone" length="10" not-null="true" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="user_email" length="50" not-null="true" />
+        </property>
+        <set name="reservations" table="reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="restaurantsearch.Reservation" />
+        </set>
+    </class>
+</hibernate-mapping>

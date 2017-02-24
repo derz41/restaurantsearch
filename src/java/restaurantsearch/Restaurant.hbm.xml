@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2017 8:42:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="restaurantsearch.Restaurant" table="restaurant" catalog="mydb" optimistic-lock="version">
+        <id name="restaurantId" type="java.lang.Integer">
+            <column name="restaurant_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cuisine" class="restaurantsearch.Cuisine" fetch="select">
+            <column name="cuisine_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="location" class="restaurantsearch.Location" fetch="select">
+            <column name="location_id" not-null="true" />
+        </many-to-one>
+        <property name="restaurantName" type="string">
+            <column name="restaurant_name" length="50" not-null="true" />
+        </property>
+        <property name="restaurantHours" type="string">
+            <column name="restaurant_hours" length="10" not-null="true" />
+        </property>
+        <property name="restaurantPhone" type="string">
+            <column name="restaurant_phone" length="10" not-null="true" />
+        </property>
+        <property name="restaurantAddress" type="string">
+            <column name="restaurant_address" length="100" not-null="true" />
+        </property>
+        <set name="reservations" table="reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="resaurant_id" not-null="true" />
+            </key>
+            <one-to-many class="restaurantsearch.Reservation" />
+        </set>
+    </class>
+</hibernate-mapping>

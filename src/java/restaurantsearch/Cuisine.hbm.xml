@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2017 8:42:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="restaurantsearch.Cuisine" table="cuisine" catalog="mydb" optimistic-lock="version">
+        <id name="cuisineId" type="java.lang.Integer">
+            <column name="cuisine_id" />
+            <generator class="identity" />
+        </id>
+        <property name="cuisineType" type="string">
+            <column name="cuisine_type" length="50" not-null="true" />
+        </property>
+        <set name="restaurants" table="restaurant" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cuisine_id" not-null="true" />
+            </key>
+            <one-to-many class="restaurantsearch.Restaurant" />
+        </set>
+    </class>
+</hibernate-mapping>

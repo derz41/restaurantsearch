@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2017 8:42:00 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="restaurantsearch.Reservation" table="reservation" catalog="mydb" optimistic-lock="version">
+        <id name="reservationId" type="java.lang.Integer">
+            <column name="reservation_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="restaurant" class="restaurantsearch.Restaurant" fetch="select">
+            <column name="resaurant_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="restaurantsearch.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="reservationDate" type="date">
+            <column name="reservation_date" length="10" not-null="true" />
+        </property>
+        <property name="reservationTime" type="string">
+            <column name="reservation_time" length="5" not-null="true" />
+        </property>
+        <property name="reservationNumGuests" type="int">
+            <column name="reservation_num_guests" not-null="true" />
+        </property>
+        <set name="guests" table="guest_reservation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reservation_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="restaurantsearch.Guest">
+                <column name="guest_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
