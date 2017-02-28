@@ -13,22 +13,22 @@ import javax.inject.Named;
  *
  * @author gabor_000
  */
-@Named(value = "actorController")
+@Named(value = "locationController")
 @SessionScoped
 public class LocationController implements Serializable{
     
     // these fields map directly to components in the location.xhtml
     String keyWord;
-
+    String response;
     // this is our class that uses Hibernate to query the location table
     LocationHelper helper;
 
     // this is our Actor POJO
     Location location;
-    String response;
+    
 
     /**
-     * Creates a new instance of ActorController
+     * Creates a new instance of locationController
      */
     public LocationController() {
         helper = new LocationHelper();

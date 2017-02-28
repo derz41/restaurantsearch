@@ -13,9 +13,18 @@ public class Location  implements java.io.Serializable {
 
      private Integer locationId;
      private String locationName;
+     private String keyWord;
      private Set<Restaurant> restaurants = new HashSet<Restaurant>(0);
 
     public Location() {
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 
 	

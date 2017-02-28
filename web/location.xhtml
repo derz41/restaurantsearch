@@ -9,9 +9,9 @@
         <h:form>
             <h:panelGrid columns="2">
         <h:outputText value="KeyWord" />
-        <h:inputText id="keyword" value="#{locationController.search}"
+        <h:inputText id="keyword" value="#{locationController.keyWord}"
                      size="50" maxlength="45" required="true" label="Location" />
-        <h:message for="keyword style="color:red; font-size: 0.7em"/>
+        <h:message for="keyword" style="font-size: 1em;"/>
         
             </h:panelGrid>
             <h:commandButton id="submit" value="Submit" action="actor" />
