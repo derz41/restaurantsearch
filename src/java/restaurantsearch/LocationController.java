@@ -18,6 +18,7 @@ import javax.inject.Named;
 public class LocationController implements Serializable{
     
     // these fields map directly to components in the location.xhtml
+    //Hi
     String keyWord;
     String response;
     // this is our class that uses Hibernate to query the location table
