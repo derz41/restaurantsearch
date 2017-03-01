@@ -8,16 +8,16 @@
     <ui:define name="body">
         <h:form>
         <h:panelGrid columns="2">
-            <h:outputText value="Restaurant Name" />
-            <h:inputText id="restName" value="#{RestaurantController.restName}"
+            <h:outputText value="Search Restaurant Name" />
+            <h:inputText id="restName" value="#{restaurantController.restaurant}"
                          size="50" maxlength="45" required="true" label="Search Restaurant Name" />
-            <h:message for="restName" style="color: red; font-size: 0.7em" />
+            <h:message for="restName" style="color: red; font-size: 1em" />
             
         </h:panelGrid>
-            <h:commandButton id="submit" value="submit" action="actor" />
+            <h:commandButton id="submit" value="Submit" action="restaurant" />
             <h:commandButton value="Clear" type="reset" />
         </h:form>
-        <h:outputText escape="false" value="#{actorController.response}" />
+        <h:outputText escape="false" value="#{restaurantController.response}" />
     </ui:define>
 
 </ui:composition>

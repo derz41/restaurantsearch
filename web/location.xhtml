@@ -8,13 +8,13 @@
     <ui:define name="body">
         <h:form>
             <h:panelGrid columns="2">
-        <h:outputText value="KeyWord" />
-        <h:inputText id="keyword" value="#{locationController.keyWord}"
-                     size="50" maxlength="45" required="true" label="Location" />
-        <h:message for="keyword" style="font-size: 1em;"/>
+        <h:outputText value="Search Location" />
+        <h:inputText id="keyWord" value="#{locationController.keyWord}"
+                     size="50" maxlength="45" required="true" label="Search Location" />
+        <h:message for="keyWord" style="color: red; font-size: 1em;"/>
         
             </h:panelGrid>
-            <h:commandButton id="submit" value="Submit" action="actor" />
+            <h:commandButton id="submit" value="Submit" action="location" />
             <h:commandButton value="Clear" type="reset" />
         </h:form>
         <h:outputText escape="false" value="#{locationController.response}" />

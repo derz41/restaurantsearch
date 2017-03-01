@@ -8,7 +8,6 @@ package restaurantsearch;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.engine.query.spi.sql.NativeSQLQueryReturn;
 
 /**
  *
@@ -27,10 +26,12 @@ public class LocationHelper {
         }
     }
     
-    public List<NativeSQLQueryReturn> selectLocation(Location l){
-        List<NativeSQLQueryReturn> result = null;
+    public List<Location> selectRestaurantByLocation(Location l, String keyWord){
+        List<Location> restaurantList = null;
 
-        String sql = " select location_id from location where location_name = :keyWord ";
+        String sql = " select * from location, restaurant "
+                + "where location_name = " + keyWord
+                + " and location.location_id = restaurant.location_id";
         
         try{
             // starting a transaction if one isn't active
@@ -38,34 +39,19 @@ public class LocationHelper {
                 session.beginTransaction();
             }
             
-            //creating an actual query that can be executed
             SQLQuery q = session.createSQLQuery(sql);
-            // associating our Actor POJO and table with the query
+            
             q.addEntity(Location.class);
             
-            // binding values to the placeholders in the query
-            q.setParameter("keyWord", l.getKeyWord());
+            q.setParameter("keyWord", l.getLocationName());
             
-            // executing the query
-            result = q.getQueryReturns();
-            
-            // commiting the query to the database
-            session.getTransaction().commit();
+            restaurantList = (List<Location>) q.list();
             
         } catch (Exception e){
             e.printStackTrace();
         }
         
-        return result;
+        return restaurantList;
     }
-    
-    public String selectRestaurant(Location l){
-        
-        String sql=" select * from restaurant where location_id = " 
-                + (l.getLocationId());
-        
-        return sql;
-    }
-    
 }
 

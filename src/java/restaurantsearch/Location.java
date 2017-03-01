@@ -18,15 +18,6 @@ public class Location  implements java.io.Serializable {
 
     public Location() {
     }
-
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
-    }
-
 	
     public Location(String locationName) {
         this.locationName = locationName;
@@ -58,8 +49,13 @@ public class Location  implements java.io.Serializable {
         this.restaurants = restaurants;
     }
 
+    public String getKeyWord() {
+        return keyWord;
+    }
 
-
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
 
 }
 

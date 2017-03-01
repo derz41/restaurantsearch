@@ -6,6 +6,7 @@
 package restaurantsearch;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -42,13 +43,14 @@ public class LocationController implements Serializable{
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
     }
-
-    public String getResponse() {
-        return response;
+    
+    public List<Location> getResponse() {
+        List<Location> rest = helper.selectRestaurantByLocation(this.location, this.keyWord);
+        return rest;
     }
 
     public void setResponse(String response) {
         this.response = response;
     }
-    
+
 }

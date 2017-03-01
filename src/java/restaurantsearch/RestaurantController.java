@@ -47,7 +47,5 @@ public class RestaurantController {
     public void setResponse(String response) {
         this.response = response;
     }
-    
-    
 
 }
