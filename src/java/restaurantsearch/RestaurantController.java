@@ -44,7 +44,7 @@ public class RestaurantController implements Serializable {
     }
 
     public List<Restaurant> getResponse() {
-        List<Restaurant> rest = helper.selectRestaurant(this.restaurants, this.restName);
+        List<Restaurant> rest = helper.selectRestaurant(this.restName);
         return rest;
         
     }

@@ -26,11 +26,11 @@ public class RestaurantHelper {
         }
     }
     
-    public List<Restaurant> selectRestaurant(Restaurant a, String restName) {
+    public List<Restaurant> selectRestaurant(String restName) {
         List<Restaurant> restaurantList = null;
         
         String sql = "select * from restaurant "
-                + "where restaurant_name like " + restName;
+                + "where restaurant_name like :restName";
         
         try {
             //starting the transaction if one is not active
@@ -44,7 +44,7 @@ public class RestaurantHelper {
             q.addEntity(Restaurant.class);
             
             //binding the values to the placeholders in the query
-            q.setParameter("restName", a.getRestaurantName());
+            q.setParameter("restName", restName);
             
             //executing the query
             restaurantList = (List<Restaurant>) q.list();

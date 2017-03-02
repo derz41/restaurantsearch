@@ -44,9 +44,26 @@ public class LocationController implements Serializable{
         this.keyWord = keyWord;
     }
     
-    public List<Location> getResponse() {
-        List<Location> rest = helper.selectRestaurantByLocation(this.location, this.keyWord);
-        return rest;
+    public String getResponse() {
+        
+        List<Location> rest = null;
+        
+        if (keyWord != null){
+            
+        
+        rest = helper.selectRestaurantByLocation(this.keyWord);
+        StringBuilder cast = new StringBuilder();
+        for(int i = 0; i < rest.size(); i++){
+            Restaurant print = (Restaurant) print.get(i);
+            cast.append(print.getRestaurantName());
+            cast.append(" ");
+        }
+        return cast.toString();
+        
+        } else {
+            response = " ";
+            return response;
+        }
     }
 
     public void setResponse(String response) {

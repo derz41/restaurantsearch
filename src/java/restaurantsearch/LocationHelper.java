@@ -14,44 +14,47 @@ import org.hibernate.Session;
  * @author gabor_000
  */
 public class LocationHelper {
-    
+
     Session session = null;
-    
-    public LocationHelper(){
-        try{
+
+    public LocationHelper() {
+        try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-        }  catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Location> selectRestaurantByLocation(String keyWord) {
+
+        List<Location> restaurantList = null;
+        
+            String sql = " select * from location, restaurant "
+                    + "where location_name = :keyWord"
+                    + " and location.location_id = restaurant.location_id";
+
+            try {
+                // starting a transaction if one isn't active
+                if (!this.session.getTransaction().isActive()) {
+                    session.beginTransaction();
+                }
+
+                SQLQuery q = session.createSQLQuery(sql);
+
+                q.addEntity(Location.class);
+
+                q.setParameter("keyWord", keyWord);
+
+                restaurantList = (List<Location>) q.list();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        
+            return restaurantList;
+        
     }
     
-    public List<Location> selectRestaurantByLocation(Location l, String keyWord){
-        List<Location> restaurantList = null;
-
-        String sql = " select * from location, restaurant "
-                + "where location_name = " + keyWord
-                + " and location.location_id = restaurant.location_id";
-        
-        try{
-            // starting a transaction if one isn't active
-            if(!this.session.getTransaction().isActive()){
-                session.beginTransaction();
-            }
-            
-            SQLQuery q = session.createSQLQuery(sql);
-            
-            q.addEntity(Location.class);
-            
-            q.setParameter("keyWord", l.getLocationName());
-            
-            restaurantList = (List<Location>) q.list();
-            
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        
-        return restaurantList;
-    }
+    
 }
-
