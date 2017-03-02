@@ -5,6 +5,7 @@
  */
 package restaurantsearch;
 
+import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -25,10 +26,11 @@ public class RestaurantHelper {
         }
     }
     
-    public int selectRestaurant(Restaurant a) {
-        int result = 0;
+    public List<Restaurant> selectRestaurant(Restaurant a, String restName) {
+        List<Restaurant> restaurantList = null;
         
-        String sql = "select * from restaurant where restaurant_name = :restName ";
+        String sql = "select * from restaurant "
+                + "where restaurant_name like " + restName;
         
         try {
             //starting the transaction if one is not active
@@ -45,7 +47,7 @@ public class RestaurantHelper {
             q.setParameter("restName", a.getRestaurantName());
             
             //executing the query
-            result = q.executeUpdate();
+            restaurantList = (List<Restaurant>) q.list();
             
             //commiting the query to the database
             session.getTransaction().commit();
@@ -54,7 +56,7 @@ public class RestaurantHelper {
             e.printStackTrace();
         }
         
-        return result;
+        return restaurantList;
     }
     
 }

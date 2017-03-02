@@ -7,10 +7,9 @@
 
     <ui:define name="body">
         <h:form>
-        <h:panelGrid columns="2">
-            <h:outputText value="Search Restaurant Name" />
-            <h:inputText id="restName" value="#{restaurantController.restaurant}"
-                         size="50" maxlength="45" required="true" label="Search Restaurant Name" />
+        <h:panelGrid columns="3">
+            <h:outputText value=" Search Restaurant Name" />
+            <h:inputText id="restName" value="#{restaurantController.restaurant}" size="50" maxlength="50" required="true" label="Restaurant Name" />
             <h:message for="restName" style="color: red; font-size: 1em" />
             
         </h:panelGrid>

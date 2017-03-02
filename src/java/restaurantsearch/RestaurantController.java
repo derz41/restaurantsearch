@@ -6,18 +6,21 @@
 package restaurantsearch;
 
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Matt
  */
 @Named(value = "restaurantController")
-@Dependent
-public class RestaurantController {
+@SessionScoped
+public class RestaurantController implements Serializable {
 
     String restaurant;
     String response;
+    String restName;
     
     RestaurantHelper helper;
     
@@ -40,12 +43,14 @@ public class RestaurantController {
         this.restaurant = restaurant;
     }
 
-    public String getResponse() {
-        return response;
+    public List<Restaurant> getResponse() {
+        List<Restaurant> rest = helper.selectRestaurant(this.restaurants, this.restName);
+        return rest;
+        
     }
 
     public void setResponse(String response) {
         this.response = response;
     }
-
+    
 }
