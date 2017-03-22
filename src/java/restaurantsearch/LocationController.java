@@ -5,10 +5,11 @@
  */
 package restaurantsearch;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -16,58 +17,53 @@ import javax.inject.Named;
  */
 @Named(value = "locationController")
 @SessionScoped
-public class LocationController implements Serializable{
-    
-    // these fields map directly to components in the location.xhtml
-    //Hi
-    String keyWord;
-    String response;
-    // this is our class that uses Hibernate to query the location table
-    LocationHelper helper;
+public class LocationController implements Serializable {
 
-    // this is our Actor POJO
-    Location location;
-    
+        DataModel restaurants;
 
-    /**
-     * Creates a new instance of locationController
-     */
+        LocationHelper helper;
+        
+        Location location;
+        
+        private Restaurant selected;
+        
+        String keyword;
+        
     public LocationController() {
-        helper = new LocationHelper();
+        
+         helper = new LocationHelper();
+         
     }
 
-    public String getKeyWord() {
-        return keyWord;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
     
-    public String getResponse() {
-        
-        List<Location> rest = null;
-        
-        if (keyWord != null){
-            
-        
-        rest = helper.selectRestaurantByLocation(this.keyWord);
-        StringBuilder cast = new StringBuilder();
-        for(int i = 0; i < rest.size(); i++){
-            Restaurant print = (Restaurant) print.get(i);
-            cast.append(print.getRestaurantName());
-            cast.append(" ");
+    public DataModel getRestaurant() {
+        if (keyword != null) {
+            restaurants = new ListDataModel(helper.selectRestaurantByLocation(keyword));
         }
-        return cast.toString();
-        
-        } else {
-            response = " ";
-            return response;
+        return restaurants;
+    }
+    
+    public Restaurant getSelected() {
+        if (selected == null){
+            selected = new Restaurant();
         }
+        return selected;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setSelected(Restaurant selected) {
+        this.selected = selected;
+    }
+    
+    public String prepareView(){
+        selected = (Restaurant) getRestaurant().getRowData();
+        return "browse";
     }
 
 }

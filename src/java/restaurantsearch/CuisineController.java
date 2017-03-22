@@ -8,35 +8,30 @@ package restaurantsearch;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.List;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 /**
  *
- * @author Matt
+ * @author gabor_000
  */
-@Named(value = "restaurantController")
+@Named(value = "cuisineController")
 @SessionScoped
-public class RestaurantController implements Serializable {
+public class CuisineController implements Serializable {
 
-    RestaurantHelper helper;
+        DataModel restaurants;
 
-    private String keyword;
-    String Cuisine;
-    String Location;
-
-    DataModel restaurants;
-    
-    Restaurant restaurant;
-    
-    private Restaurant selected;
-
-    /**
-     * Creates a new instance of RestaurantController
-     */
-    public RestaurantController() {
-        helper = new RestaurantHelper();
+        CuisineHelper helper;
+        
+        Cuisine cuisine;
+        
+        private Restaurant selected;
+        
+        String keyword;
+        
+    public CuisineController() {
+        helper = new CuisineHelper();
+         
     }
 
     public String getKeyword() {
@@ -46,32 +41,18 @@ public class RestaurantController implements Serializable {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-
+    
+    
+    
     public DataModel getRestaurant() {
         if (keyword != null) {
-            restaurants = new ListDataModel(helper.selectRestaurant(keyword));
+            restaurants = new ListDataModel(helper.selectRestaurantByCuisine(keyword));
         }
         return restaurants;
     }
-
-    public String getCuisine() {
-        return Cuisine;
-    }
-
-    public void setCuisine(String Cuisine) {
-        this.Cuisine = Cuisine;
-    }
-
-    public String getLocation() {
-        return Location;
-    }
-
-    public void setLocation(String Location) {
-        this.Location = Location;
-    }
-
+    
     public Restaurant getSelected() {
-        if (selected == null) {
+        if (selected == null){
             selected = new Restaurant();
         }
         return selected;
@@ -80,10 +61,11 @@ public class RestaurantController implements Serializable {
     public void setSelected(Restaurant selected) {
         this.selected = selected;
     }
-
-    public String prepareView() {
+    
+    public String prepareView(){
         selected = (Restaurant) getRestaurant().getRowData();
         return "browse";
     }
 
 }
+

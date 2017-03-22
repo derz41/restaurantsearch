@@ -13,11 +13,10 @@ import org.hibernate.Session;
  *
  * @author gabor_000
  */
-public class LocationHelper {
-
+public class CuisineHelper {
     Session session = null;
 
-    public LocationHelper() {
+    public CuisineHelper() {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -26,13 +25,13 @@ public class LocationHelper {
         }
     }
 
-    public List<Restaurant> selectRestaurantByLocation(String keyWord) {
+    public List<Restaurant> selectRestaurantByCuisine(String keyWord) {
 
         List<Restaurant> restaurantList = null;
         
-            String sql = " select * from location, restaurant "
-                    + "where location_name like :keyWord"
-                    + " and location.location_id = restaurant.location_id";
+            String sql = " select * from cuisine, restaurant "
+                    + "where cuisine_type like :keyWord"
+                    + " and cuisine.cuisine_id = restaurant.cuisine_id";
 
             try {
                 // starting a transaction if one isn't active
@@ -82,6 +81,4 @@ public class LocationHelper {
         
         return restaurant;
     }
-    
-    
 }

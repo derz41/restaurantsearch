@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Feb 23, 2017 8:42:00 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="restaurantsearch.Restaurant" table="restaurant" catalog="mydb" optimistic-lock="version">
+    <class name="restaurantsearch.Restaurant" table="restaurant" catalog="restaurantsearch" optimistic-lock="version">
         <id name="restaurantId" type="java.lang.Integer">
             <column name="restaurant_id" />
             <generator class="identity" />

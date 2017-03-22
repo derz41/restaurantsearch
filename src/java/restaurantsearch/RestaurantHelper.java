@@ -26,11 +26,11 @@ public class RestaurantHelper {
         }
     }
     
-    public List<Restaurant> selectRestaurant(String restName) {
+    public List<Restaurant> selectRestaurant(String keyWord) {
         List<Restaurant> restaurantList = null;
         
         String sql = "select * from restaurant "
-                + "where restaurant_name like :restName";
+                + "where restaurant_name = :keyWord";
         
         try {
             //starting the transaction if one is not active
@@ -40,11 +40,11 @@ public class RestaurantHelper {
             
             //creaing query that can be executed
             SQLQuery q = session.createSQLQuery(sql);
-            // associating actor POJO and table with the query
+            
             q.addEntity(Restaurant.class);
             
             //binding the values to the placeholders in the query
-            q.setParameter("restName", restName);
+            q.setParameter("keyWord", keyWord);
             
             //executing the query
             restaurantList = (List<Restaurant>) q.list();

@@ -2,23 +2,44 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<ui:composition template="template.xhtml">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml"> 
 
-    <ui:define name="body">
-        <h:form>
-            <h:panelGrid columns="2">
-        <h:outputText value="Search Location" />
-        <h:inputText id="keyWord" value="#{locationController.keyWord}"
-                     size="50" maxlength="45" required="true" label="Search Location" />
-        <h:message for="keyWord" style="color: red; font-size: 1em;"/>
-        
-            </h:panelGrid>
-            <h:commandButton id="submit" value="Submit" action="location" />
-            <h:commandButton value="Clear" type="reset" />
-        </h:form>
-        <h:outputText escape="false" value="#{locationController.response}" />
-    </ui:define>
+        <ui:define name="body">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Search Location" />
+                    <h:inputText id="keyWord" value="#{locationController.keyword}"
+                                 size="50" maxlength="45" required="true" label="Search Location" />
+                    <h:message for="keyWord" style="color: red; font-size: 1em;"/>
 
-</ui:composition>
+                </h:panelGrid>
+                <h:commandButton id="submit" value="Submit" action="location" />
+                <h:commandButton value="Clear" type="reset" />
+                <h:dataTable value="#{locationController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Restaurant" />
+                </f:facet>
+                <h:outputText value="#{item.restaurantName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Location" />
+                </f:facet>
+                <h:outputText value="#{item.location.locationName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value=" " />
+                </f:facet>
+                <h:commandLink action="#{locationController.prepareView()}" value="View" />
+            </h:column>
+        </h:dataTable>
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
 </html>
