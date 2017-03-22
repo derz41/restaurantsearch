@@ -63,7 +63,7 @@ public class LocationController implements Serializable {
     
     public String prepareView(){
         selected = (Restaurant) getRestaurant().getRowData();
-        return "browse";
-    }
+        return "locationDetails";
+    } 
 
 }

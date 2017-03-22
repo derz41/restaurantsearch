@@ -23,9 +23,7 @@ public class RestaurantController implements Serializable {
     RestaurantHelper helper;
 
     private String keyword;
-    String Cuisine;
-    String Location;
-
+    
     DataModel restaurants;
     
     Restaurant restaurant;
@@ -54,22 +52,6 @@ public class RestaurantController implements Serializable {
         return restaurants;
     }
 
-    public String getCuisine() {
-        return Cuisine;
-    }
-
-    public void setCuisine(String Cuisine) {
-        this.Cuisine = Cuisine;
-    }
-
-    public String getLocation() {
-        return Location;
-    }
-
-    public void setLocation(String Location) {
-        this.Location = Location;
-    }
-
     public Restaurant getSelected() {
         if (selected == null) {
             selected = new Restaurant();
@@ -83,7 +65,7 @@ public class RestaurantController implements Serializable {
 
     public String prepareView() {
         selected = (Restaurant) getRestaurant().getRowData();
-        return "browse";
+        return "nameDetails";
     }
 
 }

@@ -22,10 +22,10 @@
                     <h:outputText value="#{restaurantController.selected.restaurantAddress}" title="Address" />
                     
                     <h:outputText value="Location" />
-                    <h:outputText value="#{restaurantController.location}" title="Location" />
+                    <h:outputText value="#{restaurantController.selected.location.locationName}" title="Location" />
                     
                     <h:outputText value="Cuisine" />
-                    <h:outputText value="#{restaurantController.cuisine}" title="Cuisine" />
+                    <h:outputText value="#{restaurantController.selected.cuisine.cuisineType}" title="Cuisine" />
                 </h:panelGrid>
             </h:form>
         </ui:define>
