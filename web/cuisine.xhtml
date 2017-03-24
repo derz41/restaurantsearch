@@ -16,29 +16,23 @@
 
                 </h:panelGrid>
                 <h:commandButton id="submit" value="Submit" action="cuisine" />
-                <h:commandButton value="Clear" type="reset" />
-                <h:dataTable value="#{cuisineController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Restaurant" />
-                </f:facet>
-                <h:outputText value="#{item.restaurantName}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Cuisine" />
-                </f:facet>
-                <h:outputText value="#{item.cuisine.cuisineType}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value=" " />
-                </f:facet>
-                <h:commandLink action="#{cuisineController.prepareView()}" value="View" />
-            </h:column>
-        </h:dataTable>
+                <h:commandButton value="Clear" type="reset" action="reset"/>
+                <h:dataTable rendered="#{cuisineController.renderTable}" value="#{cuisineController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value=" " />
+                        </f:facet>
+                        <h:commandLink action="#{cuisineController.prepareView()}" value="View" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
 
         </ui:define>
-        </ui:composition>
+    </ui:composition>
 </html>

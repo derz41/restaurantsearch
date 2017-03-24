@@ -16,19 +16,13 @@
 
                 </h:panelGrid>
                 <h:commandButton id="submit" value="Submit" action="location" />
-                <h:commandButton value="Clear" type="reset" />
-                <h:dataTable value="#{locationController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
+                <h:commandButton value="Clear" type="reset" action="reset"/>
+                <h:dataTable rendered="#{locationController.renderTable}" value="#{locationController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Restaurant" />
                 </f:facet>
                 <h:outputText value="#{item.restaurantName}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Location" />
-                </f:facet>
-                <h:outputText value="#{item.location.locationName}" />
             </h:column>
             <h:column>
                 <f:facet name="header">

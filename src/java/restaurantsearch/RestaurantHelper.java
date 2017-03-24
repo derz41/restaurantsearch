@@ -30,7 +30,7 @@ public class RestaurantHelper {
         List<Restaurant> restaurantList = null;
         
         String sql = "select * from restaurant "
-                + "where restaurant_name = :keyWord";
+                + "where restaurant_name like '%" + keyWord + "%'";
         
         try {
             //starting the transaction if one is not active
@@ -44,7 +44,7 @@ public class RestaurantHelper {
             q.addEntity(Restaurant.class);
             
             //binding the values to the placeholders in the query
-            q.setParameter("keyWord", keyWord);
+            //q.setParameter("keyWord", keyWord);
             
             //executing the query
             restaurantList = (List<Restaurant>) q.list();
@@ -59,4 +59,31 @@ public class RestaurantHelper {
         return restaurantList;
     }
     
+        public Restaurant getRestaurantDetails (int restId){
+        
+        Restaurant restaurant = null;
+        
+        String sql = "select * from restaurant "
+                + "where restaurant_id = :id";
+        
+        try {
+
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            SQLQuery q = session.createSQLQuery(sql);
+            
+            q.addEntity(Restaurant.class);
+            
+            q.setParameter("id", restId);
+            
+            restaurant = (Restaurant) q.uniqueResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return restaurant;
+    }
 }

@@ -29,6 +29,8 @@ public class CuisineController implements Serializable {
         
         String keyword;
         
+        boolean rendered;
+        
     public CuisineController() {
         helper = new CuisineHelper();
          
@@ -65,6 +67,15 @@ public class CuisineController implements Serializable {
     public String prepareView(){
         selected = (Restaurant) getRestaurant().getRowData();
         return "cuisineDetails";
+    }
+    
+    public boolean isRenderTable(){
+        if (keyword == null){
+            rendered = false;
+        }else{
+            rendered = true;
+        }
+        return rendered;
     }
 
 }

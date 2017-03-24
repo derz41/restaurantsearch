@@ -15,8 +15,8 @@
             
         </h:panelGrid>
             <h:commandButton id="submit" value="Submit" action="restaurant" />
-            <h:commandButton value="Clear" type="reset" />
-        <h:dataTable value="#{restaurantController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
+            <h:commandButton value="Clear" type="reset" action="reset"/>
+            <h:dataTable rendered="#{restaurantController.renderTable}" value="#{restaurantController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0" >
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Restaurant" />
@@ -27,7 +27,7 @@
                 <f:facet name="header">
                     <h:outputText value=" " />
                 </f:facet>
-                <h:commandLink action="#{restaurantController.prepareView()}" value="View" />
+                <h:commandLink action="#{restaurantController.prepareView(item.restaurantId)}" value="View" />
             </h:column>
         </h:dataTable>
         </h:form>

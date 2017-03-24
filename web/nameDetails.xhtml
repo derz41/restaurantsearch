@@ -8,25 +8,38 @@
 
         <ui:define name="body">
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="Name" />
-                    <h:outputText value="#{restaurantController.selected.restaurantName}" title="Name" />
-                    
-                    <h:outputText value="Hours" />
-                    <h:outputText value="#{restaurantController.selected.restaurantHours}" title="Hours" />
-                    
-                    <h:outputText value="Phone" />
-                    <h:outputText value="#{restaurantController.selected.restaurantPhone}" title="Phone" />
-                    
-                    <h:outputText value="Address" />
-                    <h:outputText value="#{restaurantController.selected.restaurantAddress}" title="Address" />
-                    
-                    <h:outputText value="Location" />
-                    <h:outputText value="#{restaurantController.selected.location.locationName}" title="Location" />
-                    
-                    <h:outputText value="Cuisine" />
-                    <h:outputText value="#{restaurantController.selected.cuisine.cuisineType}" title="Cuisine" />
-                </h:panelGrid>
+                <h:dataTable value="#{restaurantController.details}" var="item" border="0" cellpadding="2" cellspacing="0" columnClasses="2">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Address" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantAddress}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Location" />
+                        </f:facet>
+                        <h:outputText value="#{item.location.locationName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Hours" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantHours}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cuisine" />
+                        </f:facet>
+                        <h:outputText value="#{item.cuisine.cuisineType}" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
         </ui:define>
 

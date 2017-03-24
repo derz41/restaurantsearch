@@ -29,6 +29,8 @@ public class LocationController implements Serializable {
         
         String keyword;
         
+        boolean rendered;
+        
     public LocationController() {
         
          helper = new LocationHelper();
@@ -66,4 +68,12 @@ public class LocationController implements Serializable {
         return "locationDetails";
     } 
 
+    public boolean isRenderTable(){
+        if (keyword == null){
+            rendered = false;
+        }else{
+            rendered = true;
+        }
+        return rendered;
+    }
 }

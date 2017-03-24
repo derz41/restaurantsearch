@@ -23,12 +23,18 @@ public class RestaurantController implements Serializable {
     RestaurantHelper helper;
 
     private String keyword;
-    
+
     DataModel restaurants;
-    
-    Restaurant restaurant;
-    
+
     private Restaurant selected;
+
+    private String restaurantName;
+    private String restaurantHours;
+    private String restaurantPhone;
+    private String restaurantAddress;
+    private int restaurantId;
+    
+    boolean rendered;
 
     /**
      * Creates a new instance of RestaurantController
@@ -63,9 +69,32 @@ public class RestaurantController implements Serializable {
         this.selected = selected;
     }
 
-    public String prepareView() {
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restId) {
+        this.restaurantId = restId;
+    }
+
+    public Restaurant getDetails() {
+        Restaurant details = helper.getRestaurantDetails(this.restaurantId);
+        return details;
+    }
+
+    public String prepareView(int restId) {
+        this.restaurantId = restId;
         selected = (Restaurant) getRestaurant().getRowData();
         return "nameDetails";
+    }
+    
+    public boolean isRenderTable(){
+        if (keyword == null){
+            rendered = false;
+        }else{
+            rendered = true;
+        }
+        return rendered;
     }
 
 }
