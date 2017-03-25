@@ -31,6 +31,8 @@ public class CuisineController implements Serializable {
         
         boolean rendered;
         
+        private int restaurantId;
+        
     public CuisineController() {
         helper = new CuisineHelper();
          
@@ -63,8 +65,21 @@ public class CuisineController implements Serializable {
     public void setSelected(Restaurant selected) {
         this.selected = selected;
     }
-    
-    public String prepareView(){
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restId) {
+        this.restaurantId = restId;
+    }
+
+    public Restaurant getDetails() {
+        Restaurant details = helper.getRestaurantDetails(this.restaurantId);
+        return details;
+    }
+
+    public String prepareView(int restId) {
+        this.restaurantId = restId;
         selected = (Restaurant) getRestaurant().getRowData();
         return "cuisineDetails";
     }

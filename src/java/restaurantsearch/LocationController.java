@@ -19,22 +19,24 @@ import javax.faces.model.ListDataModel;
 @SessionScoped
 public class LocationController implements Serializable {
 
-        DataModel restaurants;
+    DataModel restaurants;
 
-        LocationHelper helper;
-        
-        Location location;
-        
-        private Restaurant selected;
-        
-        String keyword;
-        
-        boolean rendered;
-        
+    LocationHelper helper;
+
+    Location location;
+
+    private Restaurant selected;
+
+    String keyword;
+
+    boolean rendered;
+
+    private int restaurantId;
+
     public LocationController() {
-        
-         helper = new LocationHelper();
-         
+
+        helper = new LocationHelper();
+
     }
 
     public String getKeyword() {
@@ -44,16 +46,16 @@ public class LocationController implements Serializable {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-    
+
     public DataModel getRestaurant() {
         if (keyword != null) {
             restaurants = new ListDataModel(helper.selectRestaurantByLocation(keyword));
         }
         return restaurants;
     }
-    
+
     public Restaurant getSelected() {
-        if (selected == null){
+        if (selected == null) {
             selected = new Restaurant();
         }
         return selected;
@@ -62,16 +64,30 @@ public class LocationController implements Serializable {
     public void setSelected(Restaurant selected) {
         this.selected = selected;
     }
-    
-    public String prepareView(){
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restId) {
+        this.restaurantId = restId;
+    }
+
+    public Restaurant getDetails() {
+        Restaurant details = helper.getRestaurantDetails(this.restaurantId);
+        return details;
+    }
+
+    public String prepareView(int restId) {
+        this.restaurantId = restId;
         selected = (Restaurant) getRestaurant().getRowData();
         return "locationDetails";
-    } 
+    }
 
-    public boolean isRenderTable(){
-        if (keyword == null){
+    public boolean isRenderTable() {
+        if (keyword == null) {
             rendered = false;
-        }else{
+        } else {
             rendered = true;
         }
         return rendered;

@@ -59,7 +59,7 @@ public class CuisineHelper {
         
         Restaurant restaurant = null;
         
-        String sql = "select * from Restaurant where restaurant_id = :id";
+        String sql = "select * from restaurant where restaurant_id = :id";
         
         try {
 
