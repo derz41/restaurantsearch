@@ -43,7 +43,7 @@
                         <f:facet name="header">
                             <h:outputText value="Make Reservation" />
                         </f:facet>
-                        <h:commandLink action="#{reservationController.prepareViewL(item.restaurantId)}" value="Make Reservation Here" />
+                        <h:commandLink action="#{reservationController.prepareViewL(item.restaurantId, userController.loggedIn.userId)}" value="Make Reservation Here" />
                     </h:column>
                 </h:dataTable>
             </h:form>

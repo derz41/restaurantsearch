@@ -13,7 +13,7 @@
                      size="50" maxlength="45" required="true" label="Email" />
         <h:message for="email" style="color:red; font-size: 0.7em"/>
             </h:panelGrid>
-            <h:commandButton id="submit" value="Submit" action="#{userController.prepareView(2)}" />
+            <h:commandButton id="login" value="Login" action="#{userController.prepareView(userController.getCurrent(email).userId)}" />
             <h:commandButton value="Clear" type="reset" />
             <h:commandButton id="new" value="Create User" action="userNew" />
             </h:form>

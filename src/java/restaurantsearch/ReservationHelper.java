@@ -49,7 +49,7 @@ public class ReservationHelper {
             q.setParameter("date", date);
             q.setParameter("time", time);
             q.setParameter("numGuests", numGuests);
-            q.setParameter("userId", 1);
+            q.setParameter("userId", userId);
             q.setParameter("restId", restId);
             
             // executing the query

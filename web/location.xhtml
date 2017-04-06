@@ -26,9 +26,9 @@
             </h:column>
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value=" " />
+                    <h:outputText value="" />
                 </f:facet>
-                <h:commandLink action="#{locationController.prepareView(item.restaurantId)}" value="View" />
+                <h:commandLink action="#{locationController.prepareView(item.restaurantId, userController.loggedIn.userId)}" value="View" />
             </h:column>
         </h:dataTable>
             </h:form>

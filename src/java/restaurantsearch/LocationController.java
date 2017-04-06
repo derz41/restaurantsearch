@@ -32,6 +32,8 @@ public class LocationController implements Serializable {
     boolean rendered;
 
     private int restaurantId;
+    
+    int userId;
 
     public LocationController() {
 
@@ -78,8 +80,9 @@ public class LocationController implements Serializable {
         return details;
     }
 
-    public String prepareView(int restId) {
+    public String prepareView(int restId, int userId) {
         this.restaurantId = restId;
+        this.userId = userId;
         selected = (Restaurant) getRestaurant().getRowData();
         return "locationDetails";
     }

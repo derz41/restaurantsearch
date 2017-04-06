@@ -6,9 +6,10 @@
     <ui:composition template="template.xhtml">
         <ui:define name="body">
             <h:form>
-<!--                <h:outputText value="Welcome to Restaurant Search!" style="font-size: 3em"></h:outputText>
-                <h:outputText value="" style="font-size: 3em"></h:outputText>
-                <h:outputText value="Please search by Name, Location or Cusine" style="font-size: 2em"></h:outputText>-->
+                <h:outputText value="Welcome to Restaurant Search" style="font-size: 3em"></h:outputText>
+                <h:outputText rendered="#{userController.renderTable}" value=" 
+                              #{userController.loggedIn.userFname} 
+                              #{userController.loggedIn.userLname}" style="font-size: 3em"></h:outputText>
             </h:form>
         </ui:define>
     </ui:composition>

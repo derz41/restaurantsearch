@@ -18,18 +18,18 @@ import java.io.Serializable;
 public class UserController implements Serializable {
 
     UserHelper helper;
-    
+
     User current;
-//    User loggedIn;
-    
+    User loggedIn;
+
     String responseInsert;
     String FName;
     String LName;
     String phone;
     String email;
-    
-    int userId;
-    
+
+    boolean rendered;
+
     public UserController() {
         helper = new UserHelper();
     }
@@ -52,24 +52,12 @@ public class UserController implements Serializable {
         this.current = current;
     }
 
-//    public User getLoggedIn() {
-//        loggedIn = helper.selectUserById(this.current.getUserId());
-//        return loggedIn;
-//    }
-//
-//    public void setLoggedIn(User loggedIn) {
-//        this.loggedIn = loggedIn;
-//    }
-    
-    
-
     public String getResponseInsert() {
-        if (FName != null && LName != null && phone != null && email != null) 
-        {
+        if (FName != null && LName != null && phone != null && email != null) {
 
             // calling our helper method that inserts a row into the
             // reservation table
-            if (helper.insertUser(FName, LName, phone, email)== 1) {
+            if (helper.insertUser(FName, LName, phone, email) == 1) {
                 // insert was successful
                 FName = null;
                 LName = null;
@@ -127,23 +115,28 @@ public class UserController implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    } 
-    
-    public User getDetails() {
-        User details = helper.selectUserById(2);
-        return details;
     }
-//    
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
-    
+
+    public User getLoggedIn() {
+        loggedIn = helper.selectUserById(current.getUserId());
+        return loggedIn;
+    }
+
+    public void setLoggedIn(User loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
     public String prepareView(int userId) {
-        userId = this.userId;
-        return "userDetails";
+        userId = this.current.getUserId();
+        return "index";
+    }
+    
+    public boolean isRenderTable() {
+        if (current == null) {
+            rendered = false;
+        } else {
+            rendered = true;
+        }
+        return rendered;
     }
 }

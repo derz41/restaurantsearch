@@ -146,17 +146,20 @@ public class ReservationController implements Serializable {
         this.response = response;
     }
 
-    public String prepareViewC(int restId) {
+    public String prepareViewC(int restId, int userId) {
+        this.user = userId;
         this.rest = restId;
         return "reservationCuisine";
     }
 
-    public String prepareViewL(int restId) {
+    public String prepareViewL(int restId, int userId) {
+        this.user = userId;
         this.rest = restId;
         return "reservationLocation";
     }
 
-    public String prepareViewN(int restId) {
+    public String prepareViewN(int restId, int userId) {
+        this.user = userId;
         this.rest = restId;
         return "reservationName";
     }
