@@ -39,6 +39,12 @@
                         </f:facet>
                         <h:outputText value="#{item.cuisine.cuisineType}" />
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Make Reservation" />
+                        </f:facet>
+                        <h:commandLink action="#{reservationController.prepareViewC(item.restaurantId)}" value="Make Reservation Here" />
+                    </h:column>
                 </h:dataTable>
             </h:form>
         </ui:define>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+            <h:form>
+                <h:dataTable value="#{userController.details}" var="item" border="0" cellpadding="2" cellspacing="0" columnClasses="2">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="First Name" />
+                        </f:facet>
+                        <h:outputText value="#{item.userFname}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Last Name" />
+                        </f:facet>
+                        <h:outputText value="#{item.userLname}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email" />
+                        </f:facet>
+                        <h:outputText value="#{item.userEmail}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Phone Number" />
+                        </f:facet>
+                        <h:outputText value="#{item.userPhone}" />
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton id="name" value="Search By Name" action="restaurant#{item.userId}" />
+                <h:commandButton id="cuisine" value="Search By Cuisine" action="cuisine#{item.userId}" />
+                <h:commandButton id="location" value="Search By Location" action="location#{item.userId}" />
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

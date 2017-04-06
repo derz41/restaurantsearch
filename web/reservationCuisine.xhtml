@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml"> 
+
+        <ui:define name="body">
+            <h:form>
+                <h:dataTable value="#{cuisineController.details}" var="item" border="0" cellpadding="2" cellspacing="0" columnClasses="2">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantName}" />
+                    </h:column>
+                </h:dataTable>
+                <h:panelGrid columns="3">
+                    <h:outputText value="Reservation Date" /> 
+                    <h:inputText id="date" value="#{reservationController.date}"
+                                 size="50" maxlength="45" required="true" label="date" >
+                    <f:convertDateTime pattern = "dd-mm-yyyy" />
+                    </h:inputText>
+                    <h:message for="date" style="color: red; font-size: 1em;"/>
+                    <h:outputText value="Reservation Time" />
+                    <h:inputText id="time" value="#{reservationController.time}"
+                                 size="50" maxlength="45" required="true" label="time" />
+                    <h:message for="time" style="color: red; font-size: 1em;"/>
+                    <h:outputText value="Number of Guests" />
+                    <h:inputText id="numGuests" value="#{reservationController.numGuests}"
+                                 size="50" maxlength="45" required="true" label="numGuests" />
+                    <h:message for="numGuests" style="color: red; font-size: 1em;"/>
+                </h:panelGrid>
+                <h:commandButton id="submit" value="Submit" action="reservationCuisine" />
+                <h:commandButton value="Clear" type="reset" action="reset"/>
+                </h:form>
+            <h:outputText escape="false" value="#{reservationController.response}" />
+        </ui:define>
+
+    </ui:composition>
+</html>
