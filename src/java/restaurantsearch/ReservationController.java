@@ -27,6 +27,7 @@ public class ReservationController implements Serializable {
     ReservationHelper helper;
 
     Reservation reservation;
+    DataModel detailsByUserId;
 
     String response;
 
@@ -38,6 +39,7 @@ public class ReservationController implements Serializable {
 
     DataModel userValues;
     DataModel restValues;
+    private boolean rendered;
 
     /**
      * Creates a new instance of ReservationController
@@ -121,7 +123,7 @@ public class ReservationController implements Serializable {
 
             // calling our helper method that inserts a row into the
             // reservation table
-            if (helper.insertReservation(date,time, numGuests, user, rest) == 1) {
+            if (helper.insertReservation(date, time, numGuests, user, rest) == 1) {
                 // insert was successful
                 date = null;
                 time = null;
@@ -146,6 +148,22 @@ public class ReservationController implements Serializable {
         this.response = response;
     }
 
+    public boolean isRenderTable() {
+        if (date == null & time == null) {
+            rendered = false;
+        } else {
+            rendered = true;
+        }
+        return rendered;
+    }
+
+    public DataModel getDetailsByUserId(int userId) {
+        userId = this.user;
+        detailsByUserId = new ListDataModel(helper.getReservationDetailsByUserId(userId));
+        return detailsByUserId;
+    }
+
+
     public String prepareViewC(int restId, int userId) {
         this.user = userId;
         this.rest = restId;
@@ -164,4 +182,8 @@ public class ReservationController implements Serializable {
         return "reservationName";
     }
 
+    public String prepareViewDetailsByUserId(int userId) {
+        this.user = userId;
+        return "reservationDetailsByUserId";
+    }
 }

@@ -8,6 +8,8 @@ package restaurantsearch;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -29,6 +31,8 @@ public class UserController implements Serializable {
     String email;
 
     boolean rendered;
+
+    Reservation details;
 
     public UserController() {
         helper = new UserHelper();
@@ -124,6 +128,11 @@ public class UserController implements Serializable {
 
     public void setLoggedIn(User loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public Reservation getDetails() {
+        Reservation details = helper.getRestaurantDetails(this.loggedIn.getUserId());
+        return details;
     }
 
     public String prepareView(int userId) {

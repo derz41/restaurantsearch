@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml">
+
+        <ui:define name="body">
+            <h:form>
+                <h:dataTable value="#{reservationController.getDetailsByUserId(userId)}" var="item" border="0" cellpadding="2" cellspacing="0" columnClasses="2">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurant.restaurantName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Number of Guests" />
+                        </f:facet>
+                        <h:outputText value="#{item.reservationNumGuests}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date" />
+                        </f:facet>
+                        <h:outputText value="#{item.reservationDate}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Time" />
+                        </f:facet>
+                        <h:outputText value="#{item.reservationTime}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

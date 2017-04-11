@@ -5,6 +5,7 @@
  */
 package restaurantsearch;
 
+import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -110,5 +111,33 @@ public class UserHelper {
         }
 
         return current;
+    }
+    
+    public Reservation getRestaurantDetails (int userId){
+        
+        Reservation reservation = null;
+        
+        String sql = "select * from reservation "
+                + "where user_id = :id";
+        
+        try {
+
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            SQLQuery q = session.createSQLQuery(sql);
+            
+            q.addEntity(Reservation.class);
+            
+            q.setParameter("id", userId);
+            
+            reservation = (Reservation) q.uniqueResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return reservation;
     }
 }

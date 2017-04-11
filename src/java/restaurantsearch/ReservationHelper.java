@@ -126,5 +126,59 @@ public class ReservationHelper {
         return userList;
     }
 
+    public List <Reservation> getReservationDetailsByUserId (int userId){
+        
+        List <Reservation> reservationList = null;
+        
+        String sql = "select * from reservation "
+                + "where user_id = :id";
+        
+        try {
+
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            SQLQuery q = session.createSQLQuery(sql);
+            
+            q.addEntity(Reservation.class);
+            
+            q.setParameter("id", userId);
+            
+            reservationList = (List <Reservation>) q.list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return reservationList;
+    }
     
+        public Reservation getReservationDetailsByResId (int resId){
+        
+        Reservation reservation = null;
+        
+        String sql = "select * from reservation "
+                + "where reservation_id = :id";
+        
+        try {
+
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            SQLQuery q = session.createSQLQuery(sql);
+            
+            q.addEntity(Reservation.class);
+            
+            q.setParameter("id", resId);
+            
+            reservation = (Reservation) q.uniqueResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return reservation;
+    }
 }

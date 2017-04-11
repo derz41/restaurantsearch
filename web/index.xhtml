@@ -10,6 +10,9 @@
                 <h:outputText rendered="#{userController.renderTable}" value=" 
                               #{userController.loggedIn.userFname} 
                               #{userController.loggedIn.userLname}" style="font-size: 3em"></h:outputText>
+                <h:commandButton rendered="#{userController.renderTable}"
+                                 id="details" value="View Reservations" 
+                                 action="#{reservationController.prepareViewDetailsByUserId(userController.loggedIn.userId)}" />
             </h:form>
         </ui:define>
     </ui:composition>
