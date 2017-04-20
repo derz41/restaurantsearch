@@ -47,8 +47,6 @@ public class CuisineController implements Serializable {
         this.keyword = keyword;
     }
     
-    
-    
     public DataModel getRestaurant() {
         if (keyword != null) {
             restaurants = new ListDataModel(helper.selectRestaurantByCuisine(keyword));

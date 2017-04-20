@@ -33,6 +33,12 @@
                         </f:facet>
                         <h:outputText value="#{item.reservationTime}" />
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Delete" />
+                        </f:facet>
+                        <h:commandLink action="#{reservationController.prepareViewDelete(item.reservationId)}" value="Delete Reservation"/>
+                    </h:column>
                 </h:dataTable>
             </h:form>
         </ui:define>

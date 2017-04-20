@@ -135,11 +135,19 @@ public class UserController implements Serializable {
         return details;
     }
 
+    public String noUser(int userId) {
+        userId = this.current.getUserId();
+        if (userId == 0) {
+            return "index"; 
+        }
+        return " ";
+    }
+
     public String prepareView(int userId) {
         userId = this.current.getUserId();
         return "index";
     }
-    
+
     public boolean isRenderTable() {
         if (current == null) {
             rendered = false;

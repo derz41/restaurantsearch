@@ -27,12 +27,15 @@ public class ReservationController implements Serializable {
     ReservationHelper helper;
 
     Reservation reservation;
+    Reservation selected;
     DataModel detailsByUserId;
 
     String response;
+    String delete;
 
     Date date;
     String time;
+    int reservationId;
     int numGuests;
     int user;
     int rest;
@@ -163,7 +166,6 @@ public class ReservationController implements Serializable {
         return detailsByUserId;
     }
 
-
     public String prepareViewC(int restId, int userId) {
         this.user = userId;
         this.rest = restId;
@@ -186,4 +188,50 @@ public class ReservationController implements Serializable {
         this.user = userId;
         return "reservationDetailsByUserId";
     }
+
+    public int getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
+    }
+
+    public String prepareViewDelete(int reservationId) {
+        this.reservationId = reservationId;
+        return "reservationDelete";
+    }
+
+    public Reservation getDetailsByResId(int reservationId) {
+        if (reservationId == 0){
+        reservationId = this.reservationId;
+        selected = helper.getReservationDetailsByResId(reservationId);
+        return selected;
+        } else
+            return selected;
+    }
+
+    public String getDelete() throws ParseException {
+            // calling our helper method that inserts a row into the
+            // reservation table
+            if (helper.deleteReservationDetailsByresId(this.reservationId) == 1) {
+                // insert was successful
+                date = null;
+                time = null;
+                delete = "Reservation Deleted.";
+                return delete;
+            } else {
+                // insert failed
+                date = null;
+                time = null;
+                numGuests = 0;
+                delete = "Reservation not deleted.";
+                return delete;
+            }
+    }
+
+    public void setDelete(String delete) {
+        this.delete = delete;
+    }
+
 }

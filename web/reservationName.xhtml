@@ -20,7 +20,7 @@
                     <h:outputText value="Reservation Date" /> 
                     <h:inputText id="date" value="#{reservationController.date}"
                                  size="50" maxlength="45" required="true" label="date" >
-                        <f:convertDateTime pattern = "dd-mm-yyyy" />
+                        <f:convertDateTime pattern="MM-dd-yyyy" />
                     </h:inputText>
                     <h:message for="date" style="color: red; font-size: 1em;"/>
                     <h:outputText value="Reservation Time" />

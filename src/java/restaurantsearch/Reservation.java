@@ -90,6 +90,10 @@ public class Reservation  implements java.io.Serializable {
         this.guests = guests;
     }
 
+    int setReservationId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

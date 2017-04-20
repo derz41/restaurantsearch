@@ -8,6 +8,7 @@
 
         <ui:define name="body">
             <h:form>
+                <h:outputText value="#{userController.noUser(userController.loggedIn.userId)}"/>
                 <h:panelGrid columns="2">
                     <h:outputText value="Search Location" />
                     <h:inputText id="keyWord" value="#{locationController.keyword}"
@@ -18,19 +19,19 @@
                 <h:commandButton id="submit" value="Submit" action="location" />
                 <h:commandButton value="Clear" type="reset" action="reset"/>
                 <h:dataTable rendered="#{locationController.renderTable}" value="#{locationController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Restaurant" />
-                </f:facet>
-                <h:outputText value="#{item.restaurantName}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="" />
-                </f:facet>
-                <h:commandLink action="#{locationController.prepareView(item.restaurantId, userController.loggedIn.userId)}" value="View" />
-            </h:column>
-        </h:dataTable>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{item.restaurantName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="" />
+                        </f:facet>
+                        <h:commandLink action="#{locationController.prepareView(item.restaurantId, userController.loggedIn.userId)}" value="View" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
 
         </ui:define>
