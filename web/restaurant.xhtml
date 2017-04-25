@@ -7,8 +7,9 @@
     <ui:composition  template="template.xhtml">
 
         <ui:define name="body">
-            <h:form>
-                <h:outputText value="#{userController.noUser(userController.loggedIn.userId)}"/>
+            <h:outputText rendered="#{restaurantController.renderLogin}"
+                          value="Please Login" style="color: red; font-size: 3em;"/>
+            <h:form rendered="#{restaurantController.renderLoggedIn}">
                 <h:panelGrid columns="3">
                     <h:outputText value=" Search Restaurant Name" />
                     <h:inputText id="restName" value="#{restaurantController.keyword}" size="50" maxlength="50" required="true" label="Restaurant Name" />

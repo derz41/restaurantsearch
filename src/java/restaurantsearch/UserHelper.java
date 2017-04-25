@@ -140,4 +140,39 @@ public class UserHelper {
         
         return reservation;
     }
+    
+    public int updateUser(String fName, String lName, String phone, String email) {
+        int result = 0;
+
+        String sql = "update user(user_fname, user_lname, user_phone, "
+                + "user_email) "
+                + "values (:fName, :lName, :phone, :email)";
+        try {
+            // starting a transaction if one isn't active
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            //creating an actual query that can be executed
+            SQLQuery q = session.createSQLQuery(sql);
+            // associating our Actor POJO and table with the query
+            q.addEntity(User.class);
+
+            // binding values to the placeholders in the query
+            q.setParameter("fName", fName);
+            q.setParameter("lName", lName);
+            q.setParameter("phone", phone);
+            q.setParameter("email", email);
+
+            // executing the query
+            result = q.executeUpdate();
+
+            // commiting the query to the database
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

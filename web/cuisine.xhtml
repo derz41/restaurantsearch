@@ -7,31 +7,32 @@
     <ui:composition template="template.xhtml"> 
 
         <ui:define name="body">
-            <h:form>
-                <h:outputText value="#{userController.noUser(userController.loggedIn.userId)}"/>
-                              <h:panelGrid columns="2">
-                        <h:outputText value="Search Cuisine" />
-                        <h:inputText id="keyWord" value="#{cuisineController.keyword}"
-                                     size="50" maxlength="45" required="true" label="Search Cuisine" />
-                        <h:message for="keyWord" style="color: red; font-size: 1em;"/>
+            <h:outputText rendered="#{cuisineController.renderLogin}"
+                          value="Please Login" style="color: red; font-size: 3em;"/>
+            <h:form rendered="#{cuisineController.renderLoggedIn}">                
+                <h:panelGrid columns="2">
+                    <h:outputText value="Search Cuisine" />
+                    <h:inputText id="keyWord" value="#{cuisineController.keyword}"
+                                 size="50" maxlength="45" required="true" label="Search Cuisine" />
+                    <h:message for="keyWord" style="color: red; font-size: 1em;"/>
 
-                    </h:panelGrid>
-                    <h:commandButton id="submit" value="Submit" action="cuisine" />
-                    <h:commandButton value="Clear" type="reset" action="reset"/>
-                    <h:dataTable rendered="#{cuisineController.renderTable}" value="#{cuisineController.restaurant}" var="item" border="0" cellpadding="2" cellspacing="0">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Restaurant" />
-                            </f:facet>
-                            <h:outputText value="#{item.restaurantName}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value=" " />
-                            </f:facet>
-                            <h:commandLink action="#{cuisineController.prepareView(item.restaurantId, userController.loggedIn.userId)}" value="View" />
-                        </h:column>
-                    </h:dataTable>
+                </h:panelGrid>
+                <h:commandButton id="submit" value="Submit" action="cuisine" />
+                <h:commandButton value="Clear" type="reset" action="reset"/>                       
+                <h:dataTable rendered="#{cuisineController.renderTable}" value="#{cuisineController.restaurant}" var="items" border="0" cellpadding="2" cellspacing="0">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Restaurant" />
+                        </f:facet>
+                        <h:outputText value="#{items.restaurantName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value=" " />
+                        </f:facet>
+                        <h:commandLink action="#{cuisineController.prepareView(item.restaurantId, userController.loggedIn.userId)}" value="View" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
 
         </ui:define>

@@ -204,6 +204,8 @@ public class ReservationHelper {
 
             // executing the query
             result = q.executeUpdate();
+            
+            session.getTransaction().commit();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -25,10 +25,12 @@ public class UserController implements Serializable {
     User loggedIn;
 
     String responseInsert;
+    String responseUpdate;
     String FName;
     String LName;
     String phone;
     String email;
+    int userId;
 
     boolean rendered;
 
@@ -89,6 +91,39 @@ public class UserController implements Serializable {
         this.responseInsert = responseInsert;
     }
 
+    public String getResponseUpdate() {
+        if (FName != null && LName != null && phone != null && email != null) {
+
+            // calling our helper method that inserts a row into the
+            // reservation table
+            if (helper.updateUser(FName, LName, phone, email) == 1) {
+                // insert was successful
+                FName = null;
+                LName = null;
+                phone = null;
+                email = null;
+                responseUpdate = "User Updated.";
+                return responseUpdate;
+            } else {
+                // insert failed
+                FName = null;
+                LName = null;
+                phone = null;
+                email = null;
+                responseUpdate = "User not updated.";
+                return responseUpdate;
+            }
+        } else {
+            // don't display message when first and last name are not input
+            responseUpdate = " ";
+            return responseUpdate;
+        }
+    }
+
+    public void setResponseUpdate(String responseUpdate) {
+        this.responseUpdate = responseUpdate;
+    }
+
     public String getFName() {
         return FName;
     }
@@ -135,17 +170,14 @@ public class UserController implements Serializable {
         return details;
     }
 
-    public String noUser(int userId) {
-        userId = this.current.getUserId();
-        if (userId == 0) {
-            return "index"; 
-        }
-        return " ";
-    }
-
     public String prepareView(int userId) {
         userId = this.current.getUserId();
         return "index";
+    }
+    
+    public String prepareViewUpdate(int userId) {
+        userId = this.current.getUserId();
+        return "userUpdate";
     }
 
     public boolean isRenderTable() {

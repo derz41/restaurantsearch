@@ -211,7 +211,7 @@ public class ReservationController implements Serializable {
             return selected;
     }
 
-    public String getDelete() throws ParseException {
+    public String delete() throws ParseException {
             // calling our helper method that inserts a row into the
             // reservation table
             if (helper.deleteReservationDetailsByresId(this.reservationId) == 1) {
@@ -219,7 +219,7 @@ public class ReservationController implements Serializable {
                 date = null;
                 time = null;
                 delete = "Reservation Deleted.";
-                return delete;
+                return "reservationDeleted";
             } else {
                 // insert failed
                 date = null;

@@ -13,6 +13,9 @@
                 <h:commandButton rendered="#{userController.renderTable}"
                                  id="details" value="View Reservations" 
                                  action="#{reservationController.prepareViewDetailsByUserId(userController.loggedIn.userId)}" />
+                <h:commandButton rendered="#{userController.renderTable}"
+                                 id="update" value="Update User" 
+                                 action="#{userController.prepareViewUpdate(userController.loggedIn.userId)}" />
             </h:form>
         </ui:define>
     </ui:composition>

@@ -8,6 +8,8 @@ package restaurantsearch;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -30,6 +32,7 @@ public class LocationController implements Serializable {
     String keyword;
 
     boolean rendered;
+    boolean render;
 
     private int restaurantId;
     
@@ -50,10 +53,10 @@ public class LocationController implements Serializable {
     }
 
     public DataModel getRestaurant() {
-        if (keyword != null) {
-            restaurants = new ListDataModel(helper.selectRestaurantByLocation(keyword));
-        }
-        return restaurants;
+            if (keyword != null) {
+                restaurants = new ListDataModel(helper.selectRestaurantByLocation(keyword));
+            }
+            return restaurants;
     }
 
     public Restaurant getSelected() {
@@ -94,5 +97,23 @@ public class LocationController implements Serializable {
             rendered = true;
         }
         return rendered;
+    }
+    
+        public boolean isRenderLogin() {
+        if (this.userId == 0) {
+            render = true;
+        } else {
+            render = false;
+        }
+        return render;
+    }
+    
+    public boolean isRenderLoggedIn() {
+        if (this.userId == 0) {
+            render = false;
+        } else {
+            render = true;
+        }
+        return render;
     }
 }
