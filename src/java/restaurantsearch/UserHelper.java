@@ -141,12 +141,13 @@ public class UserHelper {
         return reservation;
     }
     
-    public int updateUser(String fName, String lName, String phone, String email) {
+    public int updateUser(String fName, String lName, String phone, String email, int userId) {
         int result = 0;
 
-        String sql = "update user(user_fname, user_lname, user_phone, "
-                + "user_email) "
-                + "values (:fName, :lName, :phone, :email)";
+        String sql = "update user "
+                + "set user_fname = :fName, user_lname = :lName, "
+                + "user_phone = :phone, user_email = :email "
+                + "where user_id = :userId";
         try {
             // starting a transaction if one isn't active
             if (!this.session.getTransaction().isActive()) {
@@ -163,6 +164,7 @@ public class UserHelper {
             q.setParameter("lName", lName);
             q.setParameter("phone", phone);
             q.setParameter("email", email);
+            q.setParameter("userId", userId);
 
             // executing the query
             result = q.executeUpdate();

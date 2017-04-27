@@ -213,4 +213,43 @@ public class ReservationHelper {
 
         return result;
     }
+    
+    public int updateReservation(Date date, String time, int numGuests,
+            int userId, int restId, int reservationId) {
+        int result = 0;
+
+        String sql = "update reservation set reservation_date = :date, "
+                + "reservation_time = :time, reservation_num_guests = :numGuests, "
+                + "user_id = :userId, resaurant_id = :restId "
+                + "where reservation_id = :reservationId";
+        try {
+            // starting a transaction if one isn't active
+            if (!this.session.getTransaction().isActive()) {
+                session.beginTransaction();
+            }
+
+            //creating an actual query that can be executed
+            SQLQuery q = session.createSQLQuery(sql);
+
+            q.addEntity(Reservation.class);
+
+            // binding values to the placeholders in the query
+            q.setParameter("date", date);
+            q.setParameter("time", time);
+            q.setParameter("numGuests", numGuests);
+            q.setParameter("userId", userId);
+            q.setParameter("restId", restId);
+            q.setParameter("reservationId", reservationId);
+
+            // executing the query
+            result = q.executeUpdate();
+
+            // commiting the query to the database
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

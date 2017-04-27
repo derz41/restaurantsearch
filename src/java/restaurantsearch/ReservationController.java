@@ -31,6 +31,7 @@ public class ReservationController implements Serializable {
     DataModel detailsByUserId;
 
     String response;
+    String responseUpdate;
     String delete;
 
     Date date;
@@ -150,6 +151,36 @@ public class ReservationController implements Serializable {
     public void setResponse(String response) {
         this.response = response;
     }
+    
+    public String getResponseUpdate() throws ParseException {
+        if (date != null && time != null) {
+
+            // calling our helper method that inserts a row into the
+            // reservation table
+            if (helper.updateReservation(date, time, numGuests, user, this.rest, reservationId) == 1) {
+                // insert was successful
+                date = null;
+                time = null;
+                response = "Reservation Updated.";
+                return response;
+            } else {
+                // insert failed
+                date = null;
+                time = null;
+                numGuests = 0;
+                response = "Reservation not updated.";
+                return response;
+            }
+        } else {
+            // don't display message when first and last name are not input
+            response = " ";
+            return response;
+        }
+    }
+
+    public void setResponseUpdate(String responseUpdate) {
+        this.response = responseUpdate;
+    }
 
     public boolean isRenderTable() {
         if (date == null & time == null) {
@@ -187,6 +218,12 @@ public class ReservationController implements Serializable {
     public String prepareViewDetailsByUserId(int userId) {
         this.user = userId;
         return "reservationDetailsByUserId";
+    }
+    
+    public String prepareViewUpdate(int reservationId, int restId) {
+        this.reservationId = reservationId;
+        this.rest = restId;
+        return "reservationUpdate";
     }
 
     public int getReservationId() {

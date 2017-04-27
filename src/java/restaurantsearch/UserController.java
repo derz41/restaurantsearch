@@ -8,8 +8,6 @@ package restaurantsearch;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -30,6 +28,10 @@ public class UserController implements Serializable {
     String LName;
     String phone;
     String email;
+    String UFName;
+    String ULName;
+    String Uphone;
+    String Uemail;
     int userId;
 
     boolean rendered;
@@ -96,7 +98,7 @@ public class UserController implements Serializable {
 
             // calling our helper method that inserts a row into the
             // reservation table
-            if (helper.updateUser(FName, LName, phone, email) == 1) {
+            if (helper.updateUser(FName, LName, phone, email, this.loggedIn.getUserId()) == 1) {
                 // insert was successful
                 FName = null;
                 LName = null;

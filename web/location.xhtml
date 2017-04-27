@@ -7,9 +7,10 @@
     <ui:composition template="template.xhtml"> 
 
         <ui:define name="body">
-            <h:outputText rendered="#{locationController.renderLogin}"
+<!--            <h:outputText rendered="#{locationController.renderLogin}"
                           value="Please Login" style="color: red; font-size: 3em;"/>
-            <h:form rendered="#{locationController.renderLoggedIn}">
+            <h:form rendered="#{locationController.renderLoggedIn}">-->
+            <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="Search Location" />
                     <h:inputText id="keyWord" value="#{locationController.keyword}"

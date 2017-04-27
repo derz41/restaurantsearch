@@ -3,36 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<ui:composition template="template.xhtml">
+    <ui:composition template="template.xhtml">
 
-    <ui:define name="body">
-        <h:form>
-            <h:panelGrid columns="3">
-        <h:outputText value="First Name" />
-        <h:inputText id="fName" value="#{userController.FName}"
-                     size="50" maxlength="45" required="true" label="First Name" />
-        <h:message for="fName" style="color:red; font-size: 0.7em"/>
-        
-        <h:outputText value="Last Name" />
-        <h:inputText id="lName" value="#{userController.LName}"
-                     size="50" maxlength="45" required="true" label="Last Name" />
-        <h:message for="lName" style="color:red; font-size: 0.7em"/>
-        
-        <h:outputText value="Email" />
-        <h:inputText id="email" value="#{userController.email}"
-                     size="50" maxlength="45" required="true" label="Email" />
-        <h:message for="email" style="color:red; font-size: 0.7em"/>
-        
-        <h:outputText value="Phone" />
-        <h:inputText id="phone" value="#{userController.phone}"
-                     size="50" maxlength="45" required="true" label="Phone" />
-        <h:message for="phone" style="color:red; font-size: 0.7em"/>
-            </h:panelGrid>
-            <h:commandButton id="update" value="Update" action="userNew" />
-            <h:commandButton value="Clear" type="reset" />
+        <ui:define name="body">
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputText value="User Id" />
+                    <h:inputText disabled="true" id="userId" value="#{userController.loggedIn.userId}"
+                                 size="50" maxlength="45" required="false" label="User Id" />
+                    <h:message for="fName" style="color:red; font-size: 0.7em"/>   
+                    <h:outputText value="First Name" />
+                    <h:inputText id="FName" value="#{userController.FName}"
+                                 size="50" maxlength="45" required="true" label="First Name" />
+                    <h:message for="fName" style="color:red; font-size: 0.7em"/>
+
+                    <h:outputText value="Last Name" />
+                    <h:inputText id="LName" value="#{userController.LName}"
+                                 size="50" maxlength="45" required="true" label="Last Name" />
+                    <h:message for="lName" style="color:red; font-size: 0.7em"/>
+
+                    <h:outputText value="Email" />
+                    <h:inputText id="email" value="#{userController.email}"
+                                 size="50" maxlength="45" required="true" label="Email" />
+                    <h:message for="email" style="color:red; font-size: 0.7em"/>
+
+                    <h:outputText value="Phone" />
+                    <h:inputText id="phone" value="#{userController.phone}"
+                                 size="50" maxlength="45" required="true" label="Phone" />
+                    <h:message for="phone" style="color:red; font-size: 0.7em"/>
+                </h:panelGrid>
+                <h:commandButton id="update" value="Update" action="userUpdate" />
+                <h:commandButton value="Clear" type="reset" />
             </h:form>
-        <h:outputText escape="false" value="#{userController.responseUpdate}" />
-    </ui:define>
+            <h:outputText escape="false" value="#{userController.responseUpdate}" />
+        </ui:define>
 
-</ui:composition>
+    </ui:composition>
 </html>
